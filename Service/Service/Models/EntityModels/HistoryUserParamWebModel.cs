@@ -23,7 +23,7 @@ namespace Service.Models.EntityModels
         public int Age { get; set; }
 
         [Required] public string Gender { get; set; }
-        [DataType(DataType.Date)] [Required] public DateTime Date { get; set; }
+        [DataType(DataType.Date)] [Required] public DateTime Date { get; set; } = DateTime.Now;
 
         public AccWebModel Account { get; set; }
     }

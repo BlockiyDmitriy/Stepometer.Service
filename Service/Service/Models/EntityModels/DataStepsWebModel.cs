@@ -20,7 +20,7 @@ namespace Service.Models.EntityModels
         [DataType(DataType.Date)]
         [Display(Name = "Date")]
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
 
         public AccWebModel Account { get; set; }
     }
