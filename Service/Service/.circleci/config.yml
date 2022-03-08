@@ -11,7 +11,7 @@ jobs:
          docker build -t Service -f Dockerfile .
      # deploy the image
      - run: |         
-         docker login --username=Blockiy --password=c9GJ8Zf71 registry.heroku.com
+         docker login --username=blockij_ds_18@mf.grsu.by --password=828e10f5-e6fe-4074-ab5d-7f932efedb6e registry.heroku.com
          docker tag Service registry.heroku.com/stepometer-service/web
          docker push registry.heroku.com/stepometer-service/web                
          curl https://cli-assets.heroku.com/install.sh | sh
