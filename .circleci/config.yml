@@ -8,7 +8,7 @@ jobs:
      # build image
      - run: |         
          docker info
-         docker build -t Service -f Dockerfile .
+         docker build -t service -f Dockerfile .
      # deploy the image
      - run: |         
          docker login --username=blockij_ds_18@mf.grsu.by --password=828e10f5-e6fe-4074-ab5d-7f932efedb6e registry.heroku.com
