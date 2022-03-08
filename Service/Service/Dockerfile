@@ -26,4 +26,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 CMD dotnet Service.dll
-ENTRYPOINT ["dotnet", "Service.dll"]
+#ENTRYPOINT ["dotnet", "Service.dll"]
