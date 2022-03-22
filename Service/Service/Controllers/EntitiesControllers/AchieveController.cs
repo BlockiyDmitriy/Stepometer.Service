@@ -8,7 +8,6 @@ using System.Web.Http;
 
 namespace Service.Controllers.EntitiesControllers
 {
-    [Authorize]
     public class AchieveController : ApiController
     {
         private readonly IAchieveService achieveService;
