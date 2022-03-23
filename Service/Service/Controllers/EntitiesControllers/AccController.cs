@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace Service.Controllers.EntitiesControllers
 {
+    [RoutePrefix("api/Acc")]
     public class AccController : ApiController
     {
         private readonly IAccService accService;
@@ -17,7 +18,9 @@ namespace Service.Controllers.EntitiesControllers
             this.accService = accService;
         }
 
-        // GET: api/Acc
+        // GET: api/Acc/GetAcc
+        [Route("GetAcc")]
+        [HttpGet]
         public IEnumerable<AccWebModel> Get()
         {
             try
@@ -32,7 +35,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // GET: api/Acc/5
+        // GET: api/Acc/GetAccById
+        [Route("GetAccById")]
+        [HttpGet]
         public AccWebModel Get(int id)
         {
             try
@@ -46,7 +51,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // POST: api/Acc
+        // POST: api/Acc/AddAcc
+        [Route("AddAcc")]
+        [HttpPost]
         public void Post([FromBody] AccWebModel model)
         {
             try
@@ -59,7 +66,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // PUT: api/Acc/5
+        // PUT: api/Acc/UpdateAccById
+        [Route("UpdateAccById")]
+        [HttpPut]
         public void Put(int id, [FromBody] AccWebModel model)
         {
             try
@@ -75,7 +84,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // DELETE: api/Acc/5
+        // DELETE: api/Acc/DeleteAcc
+        [Route("DeleteAcc")]
+        [HttpDelete]
         public void Delete(AccWebModel model)
         {
             try

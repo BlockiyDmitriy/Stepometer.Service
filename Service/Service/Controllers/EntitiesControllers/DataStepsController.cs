@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace Service.Controllers.EntitiesControllers
 {
+    [RoutePrefix("api/DataSteps")]
     public class DataStepsController : ApiController
     {
         private readonly IDataStepsService dataStepsService;
@@ -17,7 +18,9 @@ namespace Service.Controllers.EntitiesControllers
             this.dataStepsService = dataStepsService;
         }
 
-        // GET: api/DataSteps
+        // GET: api/DataSteps/GetDataSteps
+        [Route("GetDataSteps")]
+        [HttpGet]
         public IEnumerable<DataStepsWebModel> Get()
         {
             try
@@ -33,13 +36,15 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // GET: api/DataSteps/5
-        public DataStepsWebModel Get(int id)
+        // GET: api/DataSteps/GetDataStepsById
+        [Route("GetDataStepsById")]
+        [HttpGet]
+        public DataStepsWebModel Get(string id)
         {
             try
             {
                 var dataStepsWebModel =
-                    MapperHelperWeb.Mapper.Map<DataStepsModel, DataStepsWebModel>(dataStepsService.Get(id));
+                    MapperHelperWeb.Mapper.Map<DataStepsModel, DataStepsWebModel>(dataStepsService.Get(Convert.ToInt32(id)));
                 return dataStepsWebModel;
             }
             catch (ArgumentNullException ex)
@@ -48,7 +53,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // POST: api/DataSteps
+        // POST: api/DataSteps/AddDataSteps
+        [Route("AddDataSteps")]
+        [HttpPost]
         public void Post([FromBody] DataStepsWebModel model)
         {
             try
@@ -61,7 +68,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // PUT: api/DataSteps/5
+        // PUT: api/DataSteps/UpdateDataStepsById
+        [Route("UpdateDataStepsById")]
+        [HttpPut]
         public void Put(int id, [FromBody] DataStepsWebModel model)
         {
             try
@@ -81,8 +90,10 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // DELETE: api/DataSteps/5
-        public void Delete(DataStepsWebModel model)
+        // DELETE: api/DataSteps/DeleteDataSteps
+        [Route("DeleteDataSteps")]
+        [HttpDelete]
+        public void Delete([FromBody] DataStepsWebModel model)
         {
             try
             {

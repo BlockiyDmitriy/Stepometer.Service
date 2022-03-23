@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace Service.Controllers.EntitiesControllers
 {
+    [RoutePrefix("api/Friends")]
     public class FriendsController : ApiController
     {
         private readonly IFriendsService friendsService;
@@ -18,7 +19,9 @@ namespace Service.Controllers.EntitiesControllers
         }
 
 
-        // GET: api/Friends
+        // GET: api/Friends/GetFriends
+        [Route("GetFriends")]
+        [HttpGet]
         public IEnumerable<FriendsWebModel> Get()
         {
             try
@@ -34,7 +37,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // GET: api/Friends/5
+        // GET: api/Friends/GetFriendsById
+        [Route("GetFriendsById")]
+        [HttpGet]
         public FriendsWebModel Get(int id)
         {
             try
@@ -48,7 +53,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // POST: api/Friends
+        // POST: api/Friends/AddFriends
+        [Route("AddFriends")]
+        [HttpPost]
         public void Post([FromBody] FriendsWebModel model)
         {
             try
@@ -61,7 +68,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // PUT: api/Friends/5
+        // PUT: api/Friends/UpdateFriendsById
+        [Route("UpdateFriendsById")]
+        [HttpPut]
         public void Put(int id, [FromBody] FriendsWebModel model)
         {
             try
@@ -81,7 +90,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // DELETE: api/Friends/5
+        // DELETE: api/Friends/DeleteFriends
+        [Route("DeleteFriends")]
+        [HttpDelete]
         public void Delete(FriendsWebModel model)
         {
             try

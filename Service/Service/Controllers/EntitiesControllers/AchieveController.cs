@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace Service.Controllers.EntitiesControllers
 {
+    [RoutePrefix("api/Achieve")]
     public class AchieveController : ApiController
     {
         private readonly IAchieveService achieveService;
@@ -18,7 +19,9 @@ namespace Service.Controllers.EntitiesControllers
         }
 
 
-        // GET: api/Achieve
+        // GET: api/Achieve/GetAchieve
+        [Route("GetAchieve")]
+        [HttpGet]
         public IEnumerable<AchieveWebModel> Get()
         {
             try
@@ -34,7 +37,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // GET: api/Achieve/5
+        // GET: api/Achieve/GetAchieveById
+        [Route("GetAchieveById")]
+        [HttpGet]
         public AchieveWebModel Get(int id)
         {
             try
@@ -48,7 +53,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // POST: api/Achieve
+        // POST: api/Achieve/AddAchieve
+        [Route("AddAchieve")]
+        [HttpPost]
         public void Post([FromBody] AchieveWebModel model)
         {
             try
@@ -61,7 +68,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // PUT: api/Achieve/5
+        // PUT: api/Achieve/UpdateAchieve
+        [Route("UpdateAchieve")]
+        [HttpPut]
         public void Put(int id, [FromBody] AchieveWebModel model)
         {
             try
@@ -81,7 +90,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // DELETE: api/Achieve/5
+        // DELETE: api/Achieve/DeleteAchieve
+        [Route("DeleteAchieve")]
+        [HttpDelete]
         public void Delete(AchieveWebModel model)
         {
             try

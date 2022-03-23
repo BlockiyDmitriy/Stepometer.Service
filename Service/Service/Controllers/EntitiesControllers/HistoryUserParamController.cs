@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace Service.Controllers.EntitiesControllers
 {
+    [RoutePrefix("api/HistoryUserParam")]
     public class HistoryUserParamController : ApiController
     {
         private readonly IHistoryUserParamService historyUserParamService;
@@ -17,7 +18,9 @@ namespace Service.Controllers.EntitiesControllers
             this.historyUserParamService = historyUserParamService;
         }
 
-        // GET: api/HistoryUserParam
+        // GET: api/HistoryUserParam/GetHistoryUserParam
+        [Route("GetHistoryUserParam")]
+        [HttpGet]
         public IEnumerable<HistoryUserParamWebModel> Get()
         {
             try
@@ -34,7 +37,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // GET: api/HistoryUserParam/5
+        // GET: api/HistoryUserParam/GetHistoryUserParamById
+        [Route("GetHistoryUserParamById")]
+        [HttpGet]
         public HistoryUserParamWebModel Get(int id)
         {
             try
@@ -50,8 +55,8 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // POST: api/HistoryUserParam
-        // new
+        // POST: api/HistoryUserParam/AddHistoryUserParam
+        [Route("AddHistoryUserParam")]
         [HttpPost]
         public void Post([FromBody] HistoryUserParamWebModel model)
         {
@@ -66,8 +71,8 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // PUT: api/HistoryUserParam/5
-        // modify
+        // PUT: api/HistoryUserParam/UpdateHistoryUserParamById
+        [Route("UpdateHistoryUserParamById")]
         [HttpPut]
         public void Put(int id, [FromBody] HistoryUserParamWebModel model)
         {
@@ -89,7 +94,9 @@ namespace Service.Controllers.EntitiesControllers
             }
         }
 
-        // DELETE: api/HistoryUserParam/5
+        // DELETE: api/HistoryUserParam/DeleteHistoryUserParam
+        [Route("DeleteHistoryUserParam")]
+        [HttpDelete]
         public void Delete(HistoryUserParamWebModel model)
         {
             try
