@@ -32,7 +32,11 @@ namespace Service.Controllers.EntitiesControllers
             }
             catch (ArgumentNullException ex)
             {
-                throw ex;
+                return new List<DataStepsWebModel>();
+            }
+            catch (Exception ex)
+            {
+                return new List<DataStepsWebModel>();
             }
         }
 
@@ -51,6 +55,10 @@ namespace Service.Controllers.EntitiesControllers
             {
                 return new DataStepsWebModel();
             }
+            catch (Exception ex)
+            {
+                return new DataStepsWebModel();
+            }
         }
 
         // POST: api/DataSteps/AddDataSteps
@@ -64,7 +72,9 @@ namespace Service.Controllers.EntitiesControllers
             }
             catch (ArgumentNullException ex)
             {
-                throw ex;
+            }
+            catch (Exception ex)
+            {
             }
         }
 
@@ -86,7 +96,9 @@ namespace Service.Controllers.EntitiesControllers
             }
             catch (ArgumentNullException ex)
             {
-                throw ex;
+            }
+            catch (Exception ex)
+            {
             }
         }
 
@@ -101,7 +113,9 @@ namespace Service.Controllers.EntitiesControllers
             }
             catch (ArgumentNullException ex)
             {
-                throw ex;
+            }
+            catch (Exception ex)
+            {
             }
         }
     }
