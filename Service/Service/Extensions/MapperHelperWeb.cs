@@ -23,6 +23,7 @@ namespace Service.Extensions
                 cfg.CreateMap<DataStepsModel, DataStepsWebModel>().ReverseMap();
                 cfg.CreateMap<FriendsModel, FriendsWebModel>().ReverseMap();
                 cfg.CreateMap<HistoryUserParamModel, HistoryUserParamWebModel>().ReverseMap();
+                cfg.CreateMap<AvgHistoryDataModel, AvgHistoryWebModel>().ReverseMap();
             });
 
             _mapper = new Mapper(_config);

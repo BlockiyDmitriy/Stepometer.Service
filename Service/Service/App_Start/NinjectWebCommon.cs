@@ -70,6 +70,7 @@ namespace Service.App_Start
             kernel.Bind<IDataStepsService>().To<DataStepsService>();
             kernel.Bind<IFriendsService>().To<FriendsService>();
             kernel.Bind<IHistoryUserParamService>().To<HistoryUserParamService>();
+            kernel.Bind<IHistoryService>().To<HistoryService>();
         }        
     }
 }

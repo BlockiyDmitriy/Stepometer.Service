@@ -81,6 +81,7 @@
     <Compile Include="Extensions\MapperHelper.cs" />
     <Compile Include="Models\AccModel.cs" />
     <Compile Include="Models\AchieveModel.cs" />
+    <Compile Include="Models\AvgHistoryDataModel.cs" />
     <Compile Include="Models\DataStepsModel.cs" />
     <Compile Include="Models\FriendsModel.cs" />
     <Compile Include="Models\HistoryUserParamModel.cs" />
@@ -94,9 +95,11 @@
     <Compile Include="Services\Contract\IAchieveService.cs" />
     <Compile Include="Services\Contract\IDataStepsService.cs" />
     <Compile Include="Services\Contract\IFriendsService.cs" />
+    <Compile Include="Services\Contract\IHistoryService.cs" />
     <Compile Include="Services\Contract\IHistoryUserParamService.cs" />
     <Compile Include="Services\DataStepsService.cs" />
     <Compile Include="Services\FriendsService.cs" />
+    <Compile Include="Services\HistoryService.cs" />
     <Compile Include="Services\HistoryUserParamService.cs" />
   </ItemGroup>
   <ItemGroup />
