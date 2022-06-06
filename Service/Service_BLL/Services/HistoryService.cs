@@ -30,10 +30,9 @@ namespace Service.BLL.Services
 
                 double inAverageSalary = listDataStepsModel.Average(employee => employee.Steps);
 
-                var listAvgHistoryDataPerDay = GetListAvgHistoryDataPerDay(listDataStepsModel);
-
                 var avgHistoryDataModel = new AvgHistoryDataModel();
-                avgHistoryDataModel.AvgDataStepsPerDay = listAvgHistoryDataPerDay;
+                avgHistoryDataModel.AvgDataStepsPerDay = GetListAvgHistoryDataPerDay(listDataStepsModel);
+                avgHistoryDataModel.AvgDataStepsWeek = GetAvgDataStepsWeek(listDataStepsModel);
 
                 return avgHistoryDataModel;
             }
@@ -43,46 +42,97 @@ namespace Service.BLL.Services
             }
         }
 
-        private List<DataStepsModel> GetListAvgHistoryDataPerDay(List<DataStepsModel> listDataStepsModel)
+        private AvgPeriodData GetAvgDataStepsWeek(List<DataStepsModel> listDataStepsModel)
         {
-            var listAvgHistoryData = new List<DataStepsModel>();
-
-            const int divisorTwoValues = 2;
-
-            for (int i = 0; i < listDataStepsModel.Count; i++)
+            try
             {
-                if (i == 0)
+
+                const int week = 7;
+
+                double avgSteps = 0.0;
+                double avgDistance = 0.0;
+                double avgTimeActivity = 0.0;
+                double avgSpeed = 0.0;
+
+                if (listDataStepsModel.Count >= week)
                 {
-                    listAvgHistoryData.Add(listDataStepsModel[i]);
+                    var lastWeekList = listDataStepsModel.Skip(listDataStepsModel.Count - week).ToList();
+                    avgSteps = lastWeekList.Average(d => d.Steps);
+                    avgDistance = (lastWeekList.Average(d => d.Steps)) * 0.75;
+                    avgTimeActivity = lastWeekList.Average(d => d.Duration);
+                    avgSpeed = lastWeekList.Average(d => d.Speed);
                 }
                 else
                 {
-                    if ((listDataStepsModel[i].Date.Day == listAvgHistoryData.Last().Date.Day) &&
-                        (listDataStepsModel[i].Date.Month == listAvgHistoryData.Last().Date.Month))
-                    {
-                        var sum = listDataStepsModel[i].Steps + listAvgHistoryData.Last().Steps;
-                        sum /= divisorTwoValues;
-                        var newModel = new DataStepsModel
-                        {
-                            Id = listAvgHistoryData.Last().Id,
-                            Account = listDataStepsModel[i].Account,
-                            Date = listDataStepsModel[i].Date,
-                            Duration = listDataStepsModel[i].Duration,
-                            Speed = listDataStepsModel[i].Speed,
-                            Steps = sum
-                        };
+                    avgSteps = listDataStepsModel.Average(d => d.Steps);
+                    avgDistance = (listDataStepsModel.Average(d => d.Steps)) * 0.75;
+                    avgTimeActivity = listDataStepsModel.Average(d => d.Duration);
+                    avgSpeed = listDataStepsModel.Average(d => d.Speed);
+                }
 
-                        listAvgHistoryData.Remove(listAvgHistoryData.Last());
-                        listAvgHistoryData.Add(newModel);
-                    }
-                    else
+                var avgHistoryData = new AvgPeriodData
+                {
+                    AvgSteps = avgSteps,
+                    AvgDistance = avgDistance,
+                    AvgTimeActivity = avgTimeActivity,
+                    AvgSpeed = avgSpeed
+                };
+
+                return avgHistoryData;
+            }
+            catch (Exception)
+            {
+                return new AvgPeriodData();
+            }
+        }
+
+        private List<DataStepsModel> GetListAvgHistoryDataPerDay(List<DataStepsModel> listDataStepsModel)
+        {
+            try
+            {
+                var listAvgHistoryData = new List<DataStepsModel>();
+
+                const int divisorTwoValues = 2;
+
+                for (int i = 0; i < listDataStepsModel.Count; i++)
+                {
+                    if (i == 0)
                     {
                         listAvgHistoryData.Add(listDataStepsModel[i]);
                     }
-                }
-            }
+                    else
+                    {
+                        if ((listDataStepsModel[i].Date.Day == listAvgHistoryData.Last().Date.Day) &&
+                            (listDataStepsModel[i].Date.Month == listAvgHistoryData.Last().Date.Month))
+                        {
+                            var sum = listDataStepsModel[i].Steps + listAvgHistoryData.Last().Steps;
+                            sum /= divisorTwoValues;
+                            var newModel = new DataStepsModel
+                            {
+                                Id = listAvgHistoryData.Last().Id,
+                                Account = listDataStepsModel[i].Account,
+                                Date = listDataStepsModel[i].Date,
+                                Duration = listDataStepsModel[i].Duration,
+                                Speed = listDataStepsModel[i].Speed,
+                                Steps = sum
+                            };
 
-            return listAvgHistoryData;
+                            listAvgHistoryData.Remove(listAvgHistoryData.Last());
+                            listAvgHistoryData.Add(newModel);
+                        }
+                        else
+                        {
+                            listAvgHistoryData.Add(listDataStepsModel[i]);
+                        }
+                    }
+                }
+
+                return listAvgHistoryData;
+            }
+            catch (Exception)
+            {
+                return new List<DataStepsModel>();
+            }
         }
         public IEnumerable<DataStepsModel> Get()
         {

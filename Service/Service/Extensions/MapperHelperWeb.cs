@@ -24,6 +24,7 @@ namespace Service.Extensions
                 cfg.CreateMap<FriendsModel, FriendsWebModel>().ReverseMap();
                 cfg.CreateMap<HistoryUserParamModel, HistoryUserParamWebModel>().ReverseMap();
                 cfg.CreateMap<AvgHistoryDataModel, AvgHistoryWebModel>().ReverseMap();
+                cfg.CreateMap<AvgPeriodData, AvgPeriodDataWebModel>().ReverseMap();
             });
 
             _mapper = new Mapper(_config);
