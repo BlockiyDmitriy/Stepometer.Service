@@ -6,9 +6,9 @@ namespace Service.Models.EntityModels
     {
         public IList<DataStepsWebModel> AvgDataStepsPerDay { get; set; }
         public AvgPeriodDataWebModel AvgDataStepsWeek { get; set; }
-        public DataStepsWebModel AvgDataStepsMonth { get; set; }
-        public DataStepsWebModel AvgDataStepsHalfYear { get; set; }
-        public DataStepsWebModel AvgDataStepsYear { get; set; }
+        public AvgPeriodDataWebModel AvgDataStepsMonth { get; set; }
+        public AvgPeriodDataWebModel AvgDataStepsHalfYear { get; set; }
+        public AvgPeriodDataWebModel AvgDataStepsYear { get; set; }
     }
     public class AvgPeriodDataWebModel
     {

@@ -18,7 +18,7 @@ namespace Service.BLL.Services
         {
         }
 
-        public AvgHistoryDataModel GetAllAvgDataSteps()
+        public List<AvgHistoryDataModel> GetAllAvgDataSteps()
         {
             try
             {
@@ -33,12 +33,56 @@ namespace Service.BLL.Services
                 var avgHistoryDataModel = new AvgHistoryDataModel();
                 avgHistoryDataModel.AvgDataStepsPerDay = GetListAvgHistoryDataPerDay(listDataStepsModel);
                 avgHistoryDataModel.AvgDataStepsWeek = GetAvgDataStepsWeek(listDataStepsModel);
+                avgHistoryDataModel.AvgDataStepsMonth = GetAvgDataStepsMonth(listDataStepsModel);
+                avgHistoryDataModel.AvgDataStepsHalfYear = GetAvgDataStepsHalfYear(listDataStepsModel);
+                avgHistoryDataModel.AvgDataStepsYear = GetAvgDataStepsYear(listDataStepsModel);
 
-                return avgHistoryDataModel;
+                var res = new List<AvgHistoryDataModel>();
+                res.Add(avgHistoryDataModel);
+                return res;
             }
             catch (Exception ex)
             {
-                return new AvgHistoryDataModel();
+                return new List<AvgHistoryDataModel>();
+            }
+        }
+
+        private AvgPeriodData GetAvgDataStepsYear(List<DataStepsModel> listDataStepsModel)
+        {
+            try
+            {
+                const int year = 365;
+                return GetAvgData(listDataStepsModel, year);
+            }
+            catch (Exception)
+            {
+                return new AvgPeriodData();
+            }
+        }
+
+        private AvgPeriodData GetAvgDataStepsHalfYear(List<DataStepsModel> listDataStepsModel)
+        {
+            try
+            {
+                const int halfYear = 180;
+                return GetAvgData(listDataStepsModel, halfYear);
+            }
+            catch (Exception)
+            {
+                return new AvgPeriodData();
+            }
+        }
+
+        private AvgPeriodData GetAvgDataStepsMonth(List<DataStepsModel> listDataStepsModel)
+        {
+            try
+            {
+                const int month = 30;
+                return GetAvgData(listDataStepsModel, month);
+            }
+            catch (Exception)
+            {
+                return new AvgPeriodData();
             }
         }
 
@@ -46,17 +90,27 @@ namespace Service.BLL.Services
         {
             try
             {
-
                 const int week = 7;
+                return GetAvgData(listDataStepsModel, week);
+            }
+            catch (Exception)
+            {
+                return new AvgPeriodData();
+            }
+        }
 
+        private AvgPeriodData GetAvgData(List<DataStepsModel> listDataStepsModel, int period)
+        {
+            try
+            {
                 double avgSteps = 0.0;
                 double avgDistance = 0.0;
                 double avgTimeActivity = 0.0;
                 double avgSpeed = 0.0;
 
-                if (listDataStepsModel.Count >= week)
+                if (listDataStepsModel.Count >= period)
                 {
-                    var lastWeekList = listDataStepsModel.Skip(listDataStepsModel.Count - week).ToList();
+                    var lastWeekList = listDataStepsModel.Skip(listDataStepsModel.Count - period).ToList();
                     avgSteps = lastWeekList.Average(d => d.Steps);
                     avgDistance = (lastWeekList.Average(d => d.Steps)) * 0.75;
                     avgTimeActivity = lastWeekList.Average(d => d.Duration);

@@ -10,9 +10,9 @@ namespace Service.BLL.Models
     {
         public IList<DataStepsModel> AvgDataStepsPerDay { get; set; }
         public AvgPeriodData AvgDataStepsWeek { get; set; }
-        public DataStepsModel AvgDataStepsMonth { get; set; }
-        public DataStepsModel AvgDataStepsHalfYear { get; set; }
-        public DataStepsModel AvgDataStepsYear { get; set; }
+        public AvgPeriodData AvgDataStepsMonth { get; set; }
+        public AvgPeriodData AvgDataStepsHalfYear { get; set; }
+        public AvgPeriodData AvgDataStepsYear { get; set; }
     }
 
     public class AvgPeriodData

@@ -24,22 +24,22 @@ namespace Service.Controllers.EntitiesControllers
         // GET: api/History
         [Route("GetHistory")]
         [HttpGet]
-        public AvgHistoryWebModel Get()
+        public IEnumerable<AvgHistoryWebModel> Get()
         {
             try
             {
                 var dataStepsWebModel =
-                    MapperHelperWeb.Mapper.Map<AvgHistoryDataModel, AvgHistoryWebModel>(
+                    MapperHelperWeb.Mapper.Map<IEnumerable<AvgHistoryDataModel>, IEnumerable<AvgHistoryWebModel>>(
                         _historyService.GetAllAvgDataSteps());
                 return dataStepsWebModel;
             }
             catch (ArgumentNullException ex)
             {
-                return new AvgHistoryWebModel();
+                return new List<AvgHistoryWebModel>();
             }
             catch (Exception ex)
             {
-                return new AvgHistoryWebModel();
+                return new List<AvgHistoryWebModel>();
             }
         }
 
@@ -54,14 +54,14 @@ namespace Service.Controllers.EntitiesControllers
         // POST: api/History
         [Route("AddHistory")]
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody] string value)
         {
         }
 
         // PUT: api/History/5
         [Route("UpdateHistoryById")]
         [HttpPut]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 
