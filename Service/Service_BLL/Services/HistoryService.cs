@@ -156,8 +156,7 @@ namespace Service.BLL.Services
                     }
                     else
                     {
-                        if ((listDataStepsModel[i].Date.Day == listAvgHistoryData.Last().Date.Day) &&
-                            (listDataStepsModel[i].Date.Month == listAvgHistoryData.Last().Date.Month))
+                        if (listDataStepsModel[i].Date == listAvgHistoryData.Last().Date)
                         {
                             var sum = listDataStepsModel[i].Steps + listAvgHistoryData.Last().Steps;
                             sum /= divisorTwoValues;
