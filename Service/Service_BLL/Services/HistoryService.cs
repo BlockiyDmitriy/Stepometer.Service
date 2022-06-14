@@ -132,6 +132,43 @@ namespace Service.BLL.Services
                     AvgSpeed = avgSpeed
                 };
 
+
+                //DateTime currentDateTime = DateTime.Now;
+
+                //var periodCount = 0;
+
+                //var reversData = listDataStepsModel;
+                //reversData.Reverse();
+                //var lastWeekList = listDataStepsModel.Skip(listDataStepsModel.Count - period).ToList();
+                //foreach (var item in lastWeekList)
+                //{
+                //    if (periodCount < period)
+                //    {
+                //        if (item.Date.Date == currentDateTime.AddDays(-periodCount).Date)
+                //        {
+                //            avgSteps = lastWeekList.Average(d => d.Steps);
+                //            avgDistance = (lastWeekList.Average(d => d.Steps)) * 0.75;
+                //            avgTimeActivity = lastWeekList.Average(d => d.Duration);
+                //            avgSpeed = lastWeekList.Average(d => d.Speed);
+
+                //            var avgHistoryData = new AvgPeriodData
+                //            {
+                //                AvgSteps = avgSteps,
+                //                AvgDistance = avgDistance,
+                //                AvgTimeActivity = avgTimeActivity,
+                //                AvgSpeed = avgSpeed
+                //            };
+                //        }
+                //        else
+                //        {
+
+                //        }
+                //    }
+
+                //    periodCount++;
+                //}
+
+
                 return avgHistoryData;
             }
             catch (Exception)
