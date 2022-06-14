@@ -103,71 +103,48 @@ namespace Service.BLL.Services
         {
             try
             {
-                double avgSteps = 0.0;
-                double avgDistance = 0.0;
-                double avgTimeActivity = 0.0;
-                double avgSpeed = 0.0;
+                DateTime currentDateTime = DateTime.Now;
 
-                if (listDataStepsModel.Count >= period)
+                var periodCount = 0;
+
+                var reversData = listDataStepsModel;
+                reversData.Reverse();
+
+                var dataStepsList = new List<DataStepsModel>();
+                foreach (var item in reversData)
                 {
-                    var lastWeekList = listDataStepsModel.Skip(listDataStepsModel.Count - period).ToList();
-                    avgSteps = lastWeekList.Average(d => d.Steps);
-                    avgDistance = (lastWeekList.Average(d => d.Steps)) * 0.75;
-                    avgTimeActivity = lastWeekList.Average(d => d.Duration);
-                    avgSpeed = lastWeekList.Average(d => d.Speed);
+                    if (periodCount < period)
+                    {
+                        if (item.Date.Date == currentDateTime.AddDays(-periodCount).Date)
+                        {
+                            dataStepsList.Add(new DataStepsModel
+                            {
+                                Steps = item.Steps,
+                                Date = item.Date,
+                                Speed = item.Speed,
+                            });
+                        }
+                        else
+                        {
+                            dataStepsList.Add(new DataStepsModel
+                            {
+                                Date = DateTime.Now.AddDays(-periodCount)
+                            });
+                        }
+                    }
+
+                    periodCount++;
                 }
-                else
-                {
-                    avgSteps = listDataStepsModel.Average(d => d.Steps);
-                    avgDistance = (listDataStepsModel.Average(d => d.Steps)) * 0.75;
-                    avgTimeActivity = listDataStepsModel.Average(d => d.Duration);
-                    avgSpeed = listDataStepsModel.Average(d => d.Speed);
-                }
+
+                var lastWeekList = dataStepsList.Skip(listDataStepsModel.Count - period).ToList();
 
                 var avgHistoryData = new AvgPeriodData
                 {
-                    AvgSteps = avgSteps,
-                    AvgDistance = avgDistance,
-                    AvgTimeActivity = avgTimeActivity,
-                    AvgSpeed = avgSpeed
+                    AvgSteps = lastWeekList.Average(d => d.Steps),
+                    AvgDistance = (lastWeekList.Average(d => d.Steps)) * 0.75,
+                    AvgTimeActivity = lastWeekList.Average(d => d.Duration),
+                    AvgSpeed = lastWeekList.Average(d => d.Speed)
                 };
-
-
-                //DateTime currentDateTime = DateTime.Now;
-
-                //var periodCount = 0;
-
-                //var reversData = listDataStepsModel;
-                //reversData.Reverse();
-                //var lastWeekList = listDataStepsModel.Skip(listDataStepsModel.Count - period).ToList();
-                //foreach (var item in lastWeekList)
-                //{
-                //    if (periodCount < period)
-                //    {
-                //        if (item.Date.Date == currentDateTime.AddDays(-periodCount).Date)
-                //        {
-                //            avgSteps = lastWeekList.Average(d => d.Steps);
-                //            avgDistance = (lastWeekList.Average(d => d.Steps)) * 0.75;
-                //            avgTimeActivity = lastWeekList.Average(d => d.Duration);
-                //            avgSpeed = lastWeekList.Average(d => d.Speed);
-
-                //            var avgHistoryData = new AvgPeriodData
-                //            {
-                //                AvgSteps = avgSteps,
-                //                AvgDistance = avgDistance,
-                //                AvgTimeActivity = avgTimeActivity,
-                //                AvgSpeed = avgSpeed
-                //            };
-                //        }
-                //        else
-                //        {
-
-                //        }
-                //    }
-
-                //    periodCount++;
-                //}
-
 
                 return avgHistoryData;
             }
