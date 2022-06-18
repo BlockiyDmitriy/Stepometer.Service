@@ -136,14 +136,14 @@ namespace Service.BLL.Services
                     periodCount++;
                 }
 
-                var lastWeekList = dataStepsList.Skip(listDataStepsModel.Count - period).ToList();
+                //var lastWeekList = dataStepsList.Skip(listDataStepsModel.Count - period).ToList();
 
                 var avgHistoryData = new AvgPeriodData
                 {
-                    AvgSteps = lastWeekList.Average(d => d.Steps),
-                    AvgDistance = (lastWeekList.Average(d => d.Steps)) * 0.75,
-                    AvgTimeActivity = lastWeekList.Average(d => d.Duration),
-                    AvgSpeed = lastWeekList.Average(d => d.Speed)
+                    AvgSteps = dataStepsList.Average(d => d.Steps),
+                    AvgDistance = (dataStepsList.Average(d => d.Steps)) * 0.75,
+                    AvgTimeActivity = dataStepsList.Average(d => d.Duration),
+                    AvgSpeed = dataStepsList.Average(d => d.Speed)
                 };
 
                 return avgHistoryData;
